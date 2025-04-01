@@ -26,16 +26,27 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
     const dragging_domain = domain;
     let dragging_context: DraggingCtx | null = null;
 
-    function registerCurrentDraggingPane(element: HTMLElement) {
+    function registerCurrentDraggingPane() {
         if (dragging_context !== null) {
             console.debug("Already dragging:", dragging_context.pane);
         } else {
-            // dragging_context.pane = element;
-            document.addEventListener("pointerup", pointerUp);
-            document.addEventListener("pointercancel", pointerUp);
-            document.addEventListener("lostpointercapture", pointerUp);
-            dragging_domain!.addEventListener("pointermove", pointerMove);
+            registerDraggingEventListeners();
         }
+    }
+
+    function registerDraggingEventListeners() {
+        document.addEventListener("pointerup", pointerUp);
+        document.addEventListener("pointercancel", pointerUp);
+        document.addEventListener("lostpointercapture", pointerUp);
+        dragging_domain!.addEventListener("pointermove", pointerMove);
+
+    }
+
+    function clearDraggingEventListeners() {
+        document.removeEventListener("pointerup", pointerUp);
+        document.removeEventListener("pointercancel", pointerUp);
+        document.removeEventListener("lostpointercapture", pointerUp);
+        dragging_domain!.removeEventListener("pointermove", pointerMove);
     }
     function pointerUp(event: PointerEvent) {
         if (dragging_context === null) { console.error("pointerUp fired for a pane that has no dragging_context!"); return; }
@@ -47,10 +58,7 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
         // If this changes in the future, we better make sure we don't make
         // any mistakes on our end.
 
-        document.removeEventListener("pointerup", pointerUp);
-        document.removeEventListener("pointercancel", pointerUp);
-        document.removeEventListener("lostpointercapture", pointerUp);
-        dragging_domain!.removeEventListener("pointermove", pointerMove);
+        clearDraggingEventListeners();
         dragging_context = null;
         event.stopPropagation();
     }
@@ -83,7 +91,7 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
                 const element_box = (event.target as HTMLElement).getBoundingClientRect();
                 const this_box = (event.currentTarget as HTMLElement).getBoundingClientRect();
                 const domain_box = dragging_domain.getBoundingClientRect();
-                registerCurrentDraggingPane(event.currentTarget as HTMLElement);
+                registerCurrentDraggingPane();
                 dragging_context = {
                     pane: event.currentTarget as HTMLElement,
                     offset_position: {
