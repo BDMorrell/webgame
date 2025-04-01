@@ -17,8 +17,8 @@ type Position = {
 */
 
 export default function makePaneDomain(domain: HTMLElement): (event: PointerEvent) => void {
+    const dragging_domain = domain;
     let dragging_pane: HTMLElement | null = null;
-    let dragging_domain = domain;
     let dragging_pane_offset_position: Position | null = null;
     let dragging_pointer: number | null = null;
 
@@ -49,10 +49,10 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
         event.stopPropagation();
         console.assert(dragging_pane_offset_position != null && dragging_pane != null);
 
-        let { x, y } = dragging_pane_offset_position!;
+        const { x, y } = dragging_pane_offset_position!;
 
-        (dragging_pane!.style.left as any) = CSS.px(event.clientX - x);
-        (dragging_pane!.style.top as any) = CSS.px(event.clientY - y);
+        dragging_pane!.style.left = CSS.px(event.clientX - x);
+        dragging_pane!.style.top = CSS.px(event.clientY - y);
     }
     function onPointerDown(event: PointerEvent) {
         if (event.isPrimary && event.currentTarget !== null && event.target !== null) {
