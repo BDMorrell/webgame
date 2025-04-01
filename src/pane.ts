@@ -27,14 +27,6 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
     const dragging_domain = domain;
     let dragging_context: DraggingCtx | null = null;
 
-    function registerCurrentDraggingPane() {
-        if (dragging_context !== null) {
-            console.debug("Already dragging:", dragging_context.pane);
-        } else {
-            registerDraggingEventListeners();
-        }
-    }
-
     function registerDraggingEventListeners() {
         document.addEventListener("pointerup", pointerUp);
         document.addEventListener("pointercancel", pointerUp);
@@ -92,7 +84,6 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
                 const element_box = (event.target as HTMLElement).getBoundingClientRect();
                 const this_box = (event.currentTarget as HTMLElement).getBoundingClientRect();
                 const domain_box = dragging_domain.getBoundingClientRect();
-                registerCurrentDraggingPane();
                 dragging_context = {
                     pane: event.currentTarget as HTMLElement,
                     offset_position: {
@@ -101,6 +92,7 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
                     },
                     pointer_id: event.pointerId,
                 };
+                registerDraggingEventListeners();
                 event.stopPropagation();
             }
         }
