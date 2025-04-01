@@ -14,8 +14,8 @@ function validateLeaveBlank(e: Event): void {
 
 export default function createPlayerNameForm() {
     return <article class="gameForm">
-        <form action="" method="get" autocomplete="off" on:submit={preventFormSubmission}>
-            <hgroup class="heading">
+        <form class="pane-structure" action="" method="get" autocomplete="off" on:submit={preventFormSubmission}>
+            <hgroup class="heading pane-grab">
                 <h2><span class="corner">Form</span> 0001</h2>
                 <p>Request for access to play this game</p>
             </hgroup>

@@ -1,10 +1,9 @@
 /* @refresh reload */
-import createPlayerNameForm from "./playerNameForm";
-import { attachEventBlocker } from "./preventFormSubmission";
-import { render } from "solid-js/web";
+import makeApplicationRoot from "./app";
+// import { attachSubmitEventBlocker } from "./preventFormSubmission";
 
-Array.from(document.getElementsByTagName("form")).forEach(attachEventBlocker);
+// Array.from(document.getElementsByTagName("form")).forEach(attachSubmitEventBlocker);
 
 const root = document.getElementById("app");
 
-render(createPlayerNameForm, root!);
+makeApplicationRoot(root!);
