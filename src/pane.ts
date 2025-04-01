@@ -31,19 +31,18 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
         document.addEventListener("pointerup", pointerUp);
         document.addEventListener("pointercancel", pointerUp);
         document.addEventListener("lostpointercapture", pointerUp);
-        dragging_domain!.addEventListener("pointermove", pointerMove);
-
+        dragging_domain.addEventListener("pointermove", pointerMove);
     }
 
     function clearDraggingEventListeners() {
         document.removeEventListener("pointerup", pointerUp);
         document.removeEventListener("pointercancel", pointerUp);
         document.removeEventListener("lostpointercapture", pointerUp);
-        dragging_domain!.removeEventListener("pointermove", pointerMove);
+        dragging_domain.removeEventListener("pointermove", pointerMove);
     }
 
     function pointerUp(event: PointerEvent) {
-        if (dragging_context === null) { console.error("pointerUp fired for a pane that has no dragging_context!"); return; }
+        if (dragging_context === null) { warnDraggingContextMissing("pointerUp") }
         // Checing the pointer_id can cause any mistake on our end to not be
         // fixable by the user.
         // This will cause bugs for multiple pointers, but I would rather have
@@ -57,7 +56,7 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
     }
 
     function pointerMove(event: PointerEvent) {
-        if (dragging_context === null) { console.error("pointerMove fired for a pane that has no dragging_context!"); return; }
+        if (dragging_context === null) { warnDraggingContextMissing("pointerMove") }
         if (event.pointerId !== dragging_context?.pointer_id) { return; }
         event.stopPropagation();
         const { x, y } = dragging_context.offset_position;
@@ -99,4 +98,8 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
     }
 
     return onPointerDown;
+}
+
+function warnDraggingContextMissing(function_name: string) {
+    console.error(`Missing dragging_context when expected for ${function_name}`)
 }
