@@ -1,13 +1,14 @@
 type Position = {
     x: number;
     y: number;
-};
+}
 
 interface DraggingCtx {
     pane: HTMLElement,
     offset_position: Position,
     pointer_id: number,
 }
+
 /* Using CSS selector notation:
 
    .pane is a movable window-like thing.
@@ -48,6 +49,7 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
         document.removeEventListener("lostpointercapture", pointerUp);
         dragging_domain!.removeEventListener("pointermove", pointerMove);
     }
+
     function pointerUp(event: PointerEvent) {
         if (dragging_context === null) { console.error("pointerUp fired for a pane that has no dragging_context!"); return; }
         // Checing the pointer_id can cause any mistake on our end to not be
@@ -57,21 +59,20 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
         // page.
         // If this changes in the future, we better make sure we don't make
         // any mistakes on our end.
-
         clearDraggingEventListeners();
         dragging_context = null;
         event.stopPropagation();
     }
+
     function pointerMove(event: PointerEvent) {
         if (dragging_context === null) { console.error("pointerMove fired for a pane that has no dragging_context!"); return; }
         if (event.pointerId !== dragging_context?.pointer_id) { return; }
         event.stopPropagation();
-
         const { x, y } = dragging_context.offset_position;
-
         dragging_context.pane.style.left = CSS.px(event.clientX - x);
         dragging_context.pane.style.top = CSS.px(event.clientY - y);
     }
+
     function onPointerDown(event: PointerEvent) {
         if (event.isPrimary && event.currentTarget !== null && event.target !== null) {
             let valid_selection = (event.currentTarget === event.target);
@@ -104,5 +105,6 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
             }
         }
     }
+
     return onPointerDown;
 }
