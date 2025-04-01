@@ -74,9 +74,10 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
                 dragging_pointer = event.pointerId;
                 const element_box = (event.target as HTMLElement).getBoundingClientRect();
                 const this_box = (event.currentTarget as HTMLElement).getBoundingClientRect();
+                const domain_box = dragging_domain.getBoundingClientRect();
                 dragging_pane_offset_position = {
-                    x: event.offsetX + (element_box.x - this_box.x),
-                    y: event.offsetY + (element_box.y - this_box.y)
+                    x: event.offsetX + (element_box.x - this_box.x + domain_box.x),
+                    y: event.offsetY + (element_box.y - this_box.y + domain_box.y),
                 };
                 event.stopPropagation();
             }
