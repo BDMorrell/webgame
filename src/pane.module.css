@@ -1,0 +1,31 @@
+@import url("./root.css");
+
+.paneDomain {
+  /* Holds panes. */
+  .pane {
+    /* Can be moved with 'grabbable' sub-elements.
+      Do not put panes inside of other panes!
+
+      These elements should have an onPointerDown listener that is registered
+      with the `.pane-domain`.
+    */
+    position: absolute;
+    width: 40em;
+  
+    padding: 1rem;
+    border-radius: 3pt;
+    box-shadow: var(--shadow-elevation-medium);
+    background-color: Canvas;
+
+    .paneGrab {
+      /* Children should be grabbable. This element itself is also grabbable.
+      */
+      user-select: none;
+    }
+
+    .paneStructure {
+      /* Children shouldn't be grabbable, but this element itself is grabbable.
+      */
+    }
+  }
+}

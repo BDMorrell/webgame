@@ -1,4 +1,5 @@
 import preventFormSubmission from "./preventFormSubmission";
+import { paneClasses } from "./pane";
 
 function validateLeaveBlank(e: Event): void {
     const input = e.target as HTMLInputElement;
@@ -14,8 +15,8 @@ function validateLeaveBlank(e: Event): void {
 
 export default function createPlayerNameForm() {
     return <article class="gameForm">
-        <form class="pane-structure" action="" method="get" autocomplete="off" on:submit={preventFormSubmission}>
-            <hgroup class="heading pane-grab">
+        <form class={paneClasses.paneStructure} action="" method="get" autocomplete="off" on:submit={preventFormSubmission}>
+            <hgroup classList={{"heading": true, [paneClasses.paneGrab]: true}}>
                 <h2><span class="corner">Form</span> 0001</h2>
                 <p>Request for access to play this game</p>
             </hgroup>

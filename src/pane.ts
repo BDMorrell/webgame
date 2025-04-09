@@ -1,3 +1,6 @@
+import paneClasses from './pane.module.css';
+export { paneClasses };
+
 type Position = {
     x: number;
     y: number;
@@ -26,6 +29,7 @@ interface DraggingCtx {
 export default function makePaneDomain(domain: HTMLElement): (event: PointerEvent) => void {
     const dragging_domain = domain;
     let dragging_context: DraggingCtx | null = null;
+    domain.classList += paneClasses.paneDomain;
 
     function registerDraggingEventListeners() {
         document.addEventListener("pointerup", pointerUp);
@@ -67,11 +71,11 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
     function onPointerDown(event: PointerEvent) {
         if (event.isPrimary && event.currentTarget !== null && event.target !== null) {
             let valid_selection = (event.currentTarget === event.target);
-            valid_selection ||= (event.target as HTMLElement).classList.contains('pane-structure');
+            valid_selection ||= (event.target as HTMLElement).classList.contains(paneClasses.paneStructure);
             if (!valid_selection) {
                 let ancestry_selector: HTMLElement | null = event.target as HTMLElement;
-                while (ancestry_selector !== null && !ancestry_selector.classList.contains('pane')) {
-                    if (ancestry_selector.classList.contains('pane-grab')) {
+                while (ancestry_selector !== null && !ancestry_selector.classList.contains(paneClasses.pane)) {
+                    if (ancestry_selector.classList.contains(paneClasses.paneGrab)) {
                         valid_selection = true;
                         break;
                     } else {
