@@ -1,5 +1,13 @@
-import paneClasses from './pane.module.css';
-export { paneClasses };
+import cssClasses from './pane.module.css';
+
+export const classes = {
+    domain: cssClasses.paneDomain,
+    pane: cssClasses.pane,
+    paneGrab:cssClasses.paneGrab,
+    paneStructure:cssClasses.paneStructure,
+};
+
+export const paneClass = classes.pane;
 
 type Position = {
     x: number;
@@ -29,7 +37,7 @@ interface DraggingCtx {
 export default function makePaneDomain(domain: HTMLElement): (event: PointerEvent) => void {
     const dragging_domain = domain;
     let dragging_context: DraggingCtx | null = null;
-    domain.classList += paneClasses.paneDomain;
+    domain.classList += classes.domain;
 
     function registerDraggingEventListeners() {
         document.addEventListener("pointerup", pointerUp);
@@ -71,11 +79,11 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
     function onPointerDown(event: PointerEvent) {
         if (event.isPrimary && event.currentTarget !== null && event.target !== null) {
             let valid_selection = (event.currentTarget === event.target);
-            valid_selection ||= (event.target as HTMLElement).classList.contains(paneClasses.paneStructure);
+            valid_selection ||= (event.target as HTMLElement).classList.contains(classes.paneStructure);
             if (!valid_selection) {
                 let ancestry_selector: HTMLElement | null = event.target as HTMLElement;
-                while (ancestry_selector !== null && !ancestry_selector.classList.contains(paneClasses.pane)) {
-                    if (ancestry_selector.classList.contains(paneClasses.paneGrab)) {
+                while (ancestry_selector !== null && !ancestry_selector.classList.contains(classes.pane)) {
+                    if (ancestry_selector.classList.contains(classes.paneGrab)) {
                         valid_selection = true;
                         break;
                     } else {

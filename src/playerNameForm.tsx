@@ -1,5 +1,5 @@
 import preventFormSubmission from "./preventFormSubmission";
-import { paneClasses } from "./pane";
+import { classes as paneClasses } from "./pane";
 
 function validateLeaveBlank(e: Event): void {
     const input = e.target as HTMLInputElement;
