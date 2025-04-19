@@ -64,8 +64,8 @@ export default function makePaneDomain(domain: HTMLElement): (event: PointerEven
         if (event.pointerId !== dragging_context?.pointer_id) { return; }
         event.stopPropagation();
         const { x, y } = dragging_context.offset_position;
-        dragging_context.pane.style.left = CSS.px(event.clientX - x);
-        dragging_context.pane.style.top = CSS.px(event.clientY - y);
+        dragging_context.pane.attributeStyleMap.set("left", CSS.px(event.clientX - x));
+        dragging_context.pane.attributeStyleMap.set("top", CSS.px(event.clientY - y));
     }
 
     function onPointerDown(event: PointerEvent) {
