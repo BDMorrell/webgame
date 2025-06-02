@@ -5,7 +5,7 @@ I just want to make a basic game. I'm planning on using DOM elements instead of
 
 This project is in a stage of research before making a proof of concept. As
 part of this, **security-related updates, including updating dependencies, is
-_not_ a priority.**`
+_not_ a priority.**
 
 ## To get this up and running…
 
