@@ -1,0 +1,12 @@
+.materialList {
+    background-color: oldlace;
+}
+
+.tableHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .button {
+        border-radius: 5pt;
+    }
+}
