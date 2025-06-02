@@ -10,12 +10,20 @@
       with the `.pane-domain`.
     */
     position: absolute;
-    width: 40em;
-  
+    /* z-index: 0; */
+    /* width: 40em; */
     padding: 1rem;
     border-radius: 3pt;
     box-shadow: var(--shadow-elevation-medium);
     background-color: Canvas;
+
+    isolation: isolate;
+    contain: paint;
+    /* container-type: size; */
+    &.move {
+      will-change: transform;
+      /* z-index: 1; */
+    }
 
     .paneGrab {
       /* Children should be grabbable. This element itself is also grabbable.
