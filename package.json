@@ -11,16 +11,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "material-symbols": "^0.31.4",
-    "solid-js": "^1.9.7"
+    "material-symbols": "^0.36.3",
+    "solid-js": "^1.9.9"
   },
   "devDependencies": {
-    "@eslint/js": "^9.28.0",
-    "eslint": "^9.28.0",
-    "globals": "^16.2.0",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.33.0",
-    "vite": "npm:rolldown-vite@^6.3.16",
-    "vite-plugin-solid": "^2.11.6"
+    "@eslint/js": "^9.37.0",
+    "eslint": "^9.37.0",
+    "globals": "^16.4.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.1",
+    "vite": "npm:rolldown-vite@^7.1.17",
+    "vite-plugin-solid": "^2.11.9"
   }
 }
