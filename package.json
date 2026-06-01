@@ -6,21 +6,16 @@
   "license": "0BSD",
   "scripts": {
     "dev": "vite",
-    "lint": "eslint",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "material-symbols": "^0.36.4",
-    "solid-js": "^1.9.11"
+    "material-symbols": "^0.44.10",
+    "solid-js": "^1.9.13"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "eslint": "^9.39.2",
-    "globals": "^16.5.0",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.55.0",
-    "vite": "npm:rolldown-vite@^7.3.1",
-    "vite-plugin-solid": "^2.11.10"
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14",
+    "vite-plugin-solid": "^2.11.12"
   }
 }
